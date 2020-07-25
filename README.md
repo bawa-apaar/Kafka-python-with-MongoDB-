@@ -8,6 +8,9 @@ Apache Kafka is a distributed publish-subscribe messaging system and a robust qu
 
 MongoDB stores data in JSON-like documents, which makes the database very flexible and scalable.
 
+In This project message (JSON type) is produced and consumed on Kafka topic and based on the "action" key in message various MongoDB 
+operations is performed. 
+
 Here we will go through following steps:
 1. Installation and path set 
 2. File Descriptions
@@ -73,11 +76,27 @@ I recommend you to go through this file before heading to python files.
 
 ### producer.py
 
-We can send message to topic directly through this file without creating one in command line. But it will alot default properties to the topic(like number of partitions and replication factor). I recommend to first create topic in command line and then produce through this 
+We can send message to topic directly through this file without creating one in command line. But it will alot default properties to the topic (like number of partitions and replication factor). I recommend to first create topic in command line and then produce through this 
 file.
 
 Here KafkaProducer object is created and message is produced through the topic "test_topic". 
 
 Message is the json type which includes driver details and based on the "action" key in message, changes will be made to MongoDB table.
 
-kafka sends message in the form of bytes, that is why it first converted to string and then to bytes.
+Kafka sends message in the form of bytes, that is why it first converted to string and then to bytes.
+
+### mapping_conversions.py
+
+It is created for make the json more flexible. It has a function convert_keys which is called from driver.py file. It basically maps the 
+input with desired output of JSON.
+
+For Example:
+There is "driver_id" key in message which has a dictionary value but present as a string in message. I want to convert that to dict. But
+if "driver_id" don't come in my message I want to skip this process. 
+
+Another Example:
+"driver_qualification" is mapped to "driver_education". 
+
+This file is basically used to map input values and their types to desired values and types.
+
+If you don't want to use this file, you can comment where it is called in driver.py file. But you should explore it. It provide great flexiblity to input data.
