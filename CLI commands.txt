@@ -6,14 +6,11 @@ Run Zookeeper (2181):
 Run Kafka Server (9092):
 	> kafka-server-start.bat config\server.properties 
 
-#if we want more servers 
-#create new servers 
-#cp config/server.properties config/server-1.properties (with 9093) 
-#cp config/server.properties config/server-2.properties (with 9094)
-
-#start them
-#kafka-server-start.bat config\server-1.properties
-#kafka-server-start.bat config\server-2.properties
+If we want to create new servers (Optional)
+	> cp config/server.properties config/server-1.properties (with 9093) 
+	> cp config/server.properties config/server-2.properties (with 9094)
+	> kafka-server-start.bat config\server-1.properties
+	> kafka-server-start.bat config\server-2.properties
 
 ------------------------------------------------------------------------------------------------------------
 
