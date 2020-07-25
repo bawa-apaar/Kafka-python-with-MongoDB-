@@ -1,0 +1,49 @@
+To start the Kafka:
+
+Run Zookeeper (2181):
+	> zookeeper-server-start.bat config\zookeeper.properties
+
+Run Kafka Server (9092):
+	> kafka-server-start.bat config\server.properties 
+
+#if we want more servers 
+#create new servers 
+#cp config/server.properties config/server-1.properties (with 9093) 
+#cp config/server.properties config/server-2.properties (with 9094)
+
+#start them
+#kafka-server-start.bat config\server-1.properties
+#kafka-server-start.bat config\server-2.properties
+
+------------------------------------------------------------------------------------------------------------
+
+Create Kafka Topic:
+	> kafka-topics --zookeeper 127.0.0.1:2181 --topic test_topic --create --partitions 3 --replication-factor 1 
+
+	Here replication factor can not be greater than 1 because replication factor can be greater than number of
+	servers and we are only initiating one broker (9092).
+
+	test_topic is the name of the topic and it has 3 partitions and one replication
+
+List all the created topics
+	> kafka-topics --zookeeper 127.0.0.1:2181 --list
+
+Description of the topic
+	> kafka-topics --zookeeper 127.0.0.1:2181 --topic test_topic --describe
+
+Kafka Producer
+	> kafka-console-producer --broker-list 127.0.0.1:9092 --topic test_topic
+	
+	Always create topic first before producing it otherwise it will just default alot partitions and replication-factor
+
+Kafka Consumer
+	> kafka-console-producer --broker-list 127.0.0.1:9092 --topic test_topic
+
+	with group (from beginning consumes all the unfetched messages in queue, can skip that too)
+	> kafka-console-consumer --bootstrap-server 127.0.0.1:9092 --topic first_topic --group test-group --from-beginning
+
+List of all consumer groups:
+	> kafka-consumer-groups --bootstrap-server localhost:9092 --list
+
+Description of consumer group
+	> kafka-consumer-groups --bootstrap-server localhost:9092 --describe --group new_group
