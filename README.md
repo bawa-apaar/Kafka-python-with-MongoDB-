@@ -65,6 +65,7 @@ Here is the description of each file in this repository
 ### CLI commands.txt
 
 This File contains all the command line commands you need to know for kafka (with comments), including:
+
 	1. Start zookeeper and Kafka server
 	2. Kafka commands like creating topics, producer, consumer and some others
 
