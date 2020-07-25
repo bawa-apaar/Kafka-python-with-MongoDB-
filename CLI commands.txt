@@ -1,18 +1,19 @@
 To start the Kafka:
 
-Run Zookeeper (2181):
+Run Zookeeper (2181): Go to Kafka path (C:\kafka_2.12-2.5.0)
 	> zookeeper-server-start.bat config\zookeeper.properties
 
-Run Kafka Server (9092):
+Run Kafka Server (9092): Go to Kafka path (C:\kafka_2.12-2.5.0)
 	> kafka-server-start.bat config\server.properties 
 
-If we want to create new servers (Optional)
+If we want to create new servers (Optional, I haven't created in this project)
 	> cp config/server.properties config/server-1.properties (with 9093) 
 	> cp config/server.properties config/server-2.properties (with 9094)
 	> kafka-server-start.bat config\server-1.properties
 	> kafka-server-start.bat config\server-2.properties
 
 ------------------------------------------------------------------------------------------------------------
+Below commands can be run from anywhere from command line because path is already set.
 
 Create Kafka Topic:
 	> kafka-topics --zookeeper 127.0.0.1:2181 --topic test_topic --create --partitions 3 --replication-factor 1 
