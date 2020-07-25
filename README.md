@@ -114,4 +114,17 @@ functions are performed.
 3. If the value in "action" key is "D", unique key i.e "cargo_number" in my case is fetched from input message and if any
    record found in  Mongo table, then that record will delete.
 
-4. If any value apart fro "I/U/D" passed in input message. That will be consider as a bad message.
+4. If any value apart from "I/U/D" passed in input message. That will be consider as a bad message.
+
+## Workflow
+
+1. First the zookeeper, server and MongoDB connections are made in CLI (refer CLI commands.txt file)
+
+2. Message is created is producer.py file and send over Kafka topic.
+
+3. That message is consumed in driver.py file and first that message is mapped to desired message by passing it to mapping_conversions.py
+   file. Then based on the "action" key, corresponding function is called and MongoDB operations performed.
+
+## Acknowledgements
+
+Kafka installation and path setup is inspired from Udemy Course: https://www.udemy.com/course/apache-kafka/ by Stephane Maarek. Rest of the work is according to my requirements. Also stackoverflow helped me at some stages.
