@@ -52,3 +52,31 @@ If you already have Apache Kafka and MongoDB installed you can skip this step.
 	slash in log.dirs (log.dirs=C:/kafka_2.12-2.5.0/data/kafka)
 
 Refer to CLI commands.txt file inorder to start zookeeper and kafka and for further kafka cli commands.
+
+### MongoDB Installations (windows)
+ 
+1. Open www.mongodb.com > software > Community Server and download the MongoDB for windows, package is msi. Here is the link of video
+	which will help you to complete install MongoDB (https://www.youtube.com/watch?v=FwMwO8pXfq0). You won't face any problem in it.
+
+## File Descriptions
+
+Here is the description of each file in this repository
+
+### CLI commands.txt
+
+This File contains all the command line commands you need to know for kafka (with comments), including:
+	1. Start zookeeper and Kafka server
+	2. Kafka commands like creating topics, producer, consumer and some others
+
+I recommend you to go through this file before heading to python files.
+
+### producer.py
+
+We can send message to topic directly through this file without creating one in command line. But it will alot default properties to the topic(like number of partitions and replication factor). I recommend to first create topic in command line and then produce through this 
+file.
+
+Here KafkaProducer object is created and message is produced through the topic "test_topic". 
+
+Message is the json type which includes driver details and based on the "action" key in message, changes will be made to MongoDB table.
+
+kafka sends message in the form of bytes, that is why it first converted to string and then to bytes.
