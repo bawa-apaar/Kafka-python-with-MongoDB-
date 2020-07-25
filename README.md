@@ -106,13 +106,12 @@ If you don't want to use this file, you can comment where it is called in driver
 This is the where consumer it created. Message which is produced by the producer is consumed here and based on "action" key in message 3
 functions are performed.
 
-	1. If the value in "action" key is "I", consumed message is inserted in MongoDB table "driver".
+1. If the value in "action" key is "I", consumed message is inserted in MongoDB table "driver".
 
-	2. If the value in "action" key is "U", consumed message is upserted in MongoDB i.e based on unique_key, if there is nothing
-		in mongodb consumed message is inserted otherwise updated (updation is based on "modified_datetime" key in message, if
-		that value is greater than previous stored value only then update will execute. Though it can removed if not needed).
+2. If the value in "action" key is "U", consumed message is upserted in MongoDB i.e based on unique_key ("cargo_number"), if there is   	   nothing in mongodb then consumed message is inserted, Otherwise updated (updation is based on "modified_datetime" key in message,
+   if that value is greater than previous stored value only then update will execute. Though it can removed if not needed).
 
-	3. If the value in "action" key is "D", primary key i.e "cargo_number" in my case is fetched from input message and if any
-		record found in  Mongo table, then that record will delete.
+3. If the value in "action" key is "D", unique key i.e "cargo_number" in my case is fetched from input message and if any
+   record found in  Mongo table, then that record will delete.
 
-	4. If any value apart fro "I/U/D" passed in input message. That will be consider as a bad message.
+4. If any value apart fro "I/U/D" passed in input message. That will be consider as a bad message.
